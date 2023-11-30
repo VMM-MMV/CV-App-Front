@@ -1,0 +1,25 @@
+# netlify.toml
+[build]
+  # Directory to publish (this should be the output of your build step)
+  publish = "build"
+
+  # Your build command
+  command = "npm run build"
+
+  # Environment variables (optional)
+  # [build.environment]
+  #  NODE_VERSION = "14"
+
+# Redirects and Rewrites (optional)
+# [[redirects]]
+#   # Redirect default Netlify subdomain to your primary domain (optional)
+#   from = "https://your-netlify-subdomain.netlify.app/*"
+#   to = "https://www.yourcustomdomain.com/:splat"
+#   status = 301
+#   force = true
+
+# [[redirects]]
+#   # SPA fallback for handling client-side routing
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
