@@ -1,0 +1,432 @@
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#parent {
+  display: flex;
+}
+
+.aside-nav{
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 240px;
+  padding: 20px 50px 35px;
+  background: #a47fc9;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  display: block;
+}
+
+.footer-aside {
+  margin: auto -10px 0 -30px;
+  position: relative;
+}
+
+.App-header {
+  flex: 1;
+  position: relative;
+  top: 0;
+  z-index: 999;
+  height: 50px;
+  width: 150px;
+  background: #a47fc9;  
+}
+
+.page-header {
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 25px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+a {
+  color: #131638;
+  text-decoration: none;
+  text-align: center;
+}
+
+.logo-header {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  cursor: pointer;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: 105px;
+}
+
+.aside-right {
+  flex: 1;
+  margin-left: 268px;
+  padding: 0 45px;
+  background: white; 
+}
+
+.container {
+  margin-right: auto;
+  margin-left: -150px;
+}
+
+@media (min-width: 1200px) {
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1140px;
+    width: 100%;
+    padding: 0 15px;
+}
+}
+
+.space {
+  position: relative;
+  padding-top: 30px;
+  padding-bottom: 30px; 
+  text-align: left; 
+}
+
+.page-title {
+  font-family: "Domine",Georgia,serif;
+  font-size: 2.2rem;
+  color: #002d6b;
+  line-height: 4rem;
+  font-weight: 700;
+}  
+
+.sub-title,
+.sub-title-2 {
+  font-size: 1.1rem;
+  color: #002d6b;
+  line-height: 2.6rem;
+  font-weight: 500;
+}
+
+.space h1 {
+  margin-top: 20px;
+  margin-bottom: -10px;
+}
+
+.space h2 {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+h1, h2 {
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  font-family: "Domine",sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #002d6b;
+}
+
+.initial {
+  text-align: center;
+}
+
+.main-page {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 80px;
+  max-width: 850px;
+}
+
+.form,
+.form2,
+.form3,
+.form4,
+.form5,
+.form6,
+.form7 {
+  width: 1000px;
+}
+
+.name-full-fields,
+.address-full-fields,
+.coming-from-fields,
+.email-number-full-fields,
+.family-status-full-fields,
+.degree-city-full-fields,
+.school-full-fields,
+.study-fields,
+.job-city-full-fields,
+.employer-full-fields,
+.skills-full-fields,
+.language-full-fields,
+.hobby-full-fields,
+.achievements-full-fields {
+  display: flex;
+  flex-direction: row;  
+  width: 90%;
+  margin-bottom: 10px;  
+}
+
+.level-skills-full-fields {
+  width: 90%;
+  display: flex;
+  flex-direction: row;  
+  margin-bottom: 10px;  
+}
+
+.job-description-fields {
+  display: flex;
+  flex-direction: row;  
+  width: 90%;
+  margin-bottom: 10px;  
+  flex-wrap: wrap;
+}
+
+.first-name-field,
+.last-name-field,
+.address-field,
+.city-field,
+.nationality-field,
+.sex-status-field,
+.date-birth-field,
+.email-address-field,
+.phone-number-field,
+.phone-field,
+.civil-status-field,
+.kids-status-field,
+.degree-field,
+.city-field,
+.school-field,
+.date-study-field,
+.job-field,
+.employer-field,
+.job-box-field,
+.skills-field,
+.level-skills-field,
+.language-field,
+.level-language-field,
+.hobby-field,
+.achievements-field {
+  flex-grow: 1;
+  margin-right: 10px;  
+  margin-bottom: 5px;
+}
+
+.name-full-fields label,
+.address-full-fields label,
+.coming-from-fields label,
+.email-number-full-fields label,
+.family-status-full-fields label,
+.degree-city-full-fields label,
+.school-full-fields label,
+.study-fields label,
+.job-city-full-fields label,
+.employer-full-fields label,
+.job-description-fields label,
+.skills-full-fields label,
+.level-skills-full-fields label,
+.language-full-fields label,
+.hobby-full-fields label,
+.achievements-full-fields label {
+  display: inline-block;
+  color: #002d6b;
+  flex-grow: 1;
+}
+
+.name-full-fields .form-name,
+.address-full-fields .form-name,
+.coming-from-fields .form-name,
+.email-number-full-fields .form-name,
+.family-status-full-fields .form-name,
+.degree-city-full-fields .form-name,
+.school-full-fields .form-name,
+.study-fields .form-name,
+.job-city-full-fields .form-name,
+.employer-full-fields .form-name,
+.skills-full-fields .form-name,
+.language-full-fields .form-name,
+.hobby-full-fields .form-name {
+  display: block;
+  padding-bottom: 8px;
+  color: #002d6b;
+  width: 100%; 
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #eaeaea;
+  border-radius: 3px;
+  margin-top: 5px;
+}
+
+.level-skills-full-fields .form-name {
+  padding-bottom: 8px;
+  width: 100%; 
+  padding: 12px 0;
+}
+
+.level-skills-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  width: 100%;
+}
+
+.level-text-container {
+  width: 110px; 
+}
+
+.level-text-label {
+  display: inline-block;
+  color: #002d6b;
+  margin-left: 10px; 
+  width: 120px;
+}
+
+.job-description-fields .form-name,
+.achievements-full-fields .form-name {
+  display: block;
+  color: #002d6b;
+  width: 100%; 
+  margin-top: 5px;
+  height: auto;
+}
+
+.ql-editor {
+  word-wrap: break-word;
+  min-height: 95px;
+  font-size: 16px;
+}
+
+.address-field .form-name {
+  margin-right: 207px;
+}
+
+.coming-from-fields .date-birth-field,
+.study-fields .date-study-field {
+  width: 100%;
+  display: flex;
+}
+
+.date-birth-sex-field,
+.date-study-full-field {
+  flex-grow: 1;
+}
+
+.date-selector, .month-selector, .year-selector {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.phone-field {
+  margin-top: 19px;
+}
+
+.phone-field input[type=text] {
+  height: 48px;
+}
+
+.phone-field {
+  width: 10%;
+}
+
+.phone-number-field {
+  width: 0;
+}
+
+.email-address-field {
+ width: 275px;
+}
+
+.sex-status-field {
+  width: 315px;
+}
+
+.civil-status-field {
+  width: 155px;
+}
+
+.button-submit {
+  margin-top: 0;
+  margin-bottom: 15px;
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-field {
+  cursor: pointer;
+  border: none;
+  line-height: 2.5;
+  padding: 0 50px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 25px;
+  background-color: #002d6b;
+  background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+  box-shadow:
+    inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.button-back {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.button-next {
+  margin-right: 108px;
+  margin-left: 0;
+}
+
+.button-create {
+  margin-top: 40px;
+  margin-left: 230px;
+}
+
+.first-page .button-next {
+  margin-left: auto;
+}
+
+option {
+  padding: 0;
+}
+
+
+
+
+
