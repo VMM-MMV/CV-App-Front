@@ -63,7 +63,7 @@ function App() {
     try {
       console.log(collectedData);
       // setFormSubmitted(true);
-      await axios.post('https://mihai-boot.azurewebsites.net/addPerson', {
+      await axios.post('http://ec2-34-224-91-231.compute-1.amazonaws.com:80/addPerson', {
         name: collectedData.person.name,
         lastname: collectedData.person.lastname,
         address: collectedData.person.address,
