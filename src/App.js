@@ -138,7 +138,7 @@ function App() {
                     )}
                     {steps.indexOf(currentForm) >= steps.indexOf('person') && (
                       isFinalizePage ? (
-                        <button onClick={handleFinalSubmit} className="button-field button-next" type="button">
+                        <button onClick={handleFinalSubmit} className="button-field button-final" type="button">
                           Submit
                         </button>
                       ) : (

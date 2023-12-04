@@ -413,6 +413,29 @@ h1, h2 {
   margin-left: 0;
 }
 
+.button-final {
+  margin-right: 108px;
+  margin-left: 0;
+  transition-duration: 0.4s;
+}
+
+.button-final:hover, .button-back:hover, .button-next:hover {
+  background-color: #a47fc9;
+  color: white;
+}
+
+.button-final:active, .button-back:active, .button-next:active {
+  transform: translateY(8px);
+}
+
+.button-next:active {
+  transform: translateX(4px);
+}
+
+.button-back:active {
+  transform: translateX(-4px);
+}
+
 .button-create {
   margin-top: 40px;
   margin-left: 230px;
