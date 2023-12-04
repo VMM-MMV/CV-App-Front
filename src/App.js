@@ -63,7 +63,7 @@ function App() {
     try {
       console.log(collectedData);
       // setFormSubmitted(true);
-      await axios.post('https://34.224.91.231/addPerson', {
+      await axios.post('https://www.juangroup.top/addPerson', {
         name: collectedData.person.name,
         lastname: collectedData.person.lastname,
         address: collectedData.person.address,
