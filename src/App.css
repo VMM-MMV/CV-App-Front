@@ -417,12 +417,12 @@ h1, h2 {
   margin-left: 0;
 }
 
-.button-final:hover, .button-back:hover, .button-next:hover {
+.button-final:hover, .button-back:hover, .button-next:hover, .button-create:hover {
   background-color: #a47fc9;
   color: white;
 }
 
-.button-final:active {
+.button-final:active, .button-create:active {
   box-shadow: none;
   transform: translateY(5px);
 }
