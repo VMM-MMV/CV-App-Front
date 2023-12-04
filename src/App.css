@@ -394,13 +394,12 @@ h1, h2 {
   padding: 0 50px;
   font-size: 1.2rem;
   text-align: center;
+  outline: none;
   color: #fff;
   border-radius: 25px;
   background-color: #002d6b;
   background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
-  box-shadow:
-    inset 2px 2px 3px rgba(255, 255, 255, 0.6),
-    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 5px #5a3e79;
 }
 
 .button-back {
@@ -416,7 +415,6 @@ h1, h2 {
 .button-final {
   margin-right: 108px;
   margin-left: 0;
-  transition-duration: 0.4s;
 }
 
 .button-final:hover, .button-back:hover, .button-next:hover {
@@ -424,15 +422,18 @@ h1, h2 {
   color: white;
 }
 
-.button-final:active, .button-back:active, .button-next:active {
-  transform: translateY(8px);
+.button-final:active {
+  box-shadow: none;
+  transform: translateY(5px);
 }
 
 .button-next:active {
+  box-shadow: none;
   transform: translateX(4px);
 }
 
 .button-back:active {
+  box-shadow: none;
   transform: translateX(-4px);
 }
 
