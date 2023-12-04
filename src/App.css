@@ -38,7 +38,7 @@
   top: 0;
   bottom: 0;
   width: 240px;
-  padding: 20px 50px 35px;
+  padding: 0 50px 55px;
   background: #a47fc9;
 
   display: flex;
@@ -486,8 +486,6 @@ option {
 .no-scroll {
   overflow: hidden;
 }
-
-
 
 
 
