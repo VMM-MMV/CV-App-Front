@@ -12,10 +12,24 @@ import Achievements from './Achievements';
 import Finalize from './Finalize';
 import axios from 'axios';
 
+function SubmissionPopup({ onClose }) {
+  return (
+      <div className="popup-overlay">
+        <div className="popup-content">
+          <p>Your CV has been submitted successfully!</p>
+            <div className="button-container">
+            <button autoFocus className="button-ok" onClick={onClose}>OK</button>
+            </div>
+        </div>
+      </div>
+  );
+}
+
 function App() {
   const steps = ['person', 'education', 'experience', 'skills', 'languages', 'hobby', 'achievements', 'finalize'];
   const [currentForm, setCurrentForm] = useState('initial');
   const [furthestStepReached, setFurthestStepReached] = useState(0);
+  const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
   // const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [collectedData, setCollectedData] = useState({
@@ -32,6 +46,11 @@ function App() {
 
   const handleStartClick = () => {
     setCurrentForm('person');
+  };
+
+  const closePopup = () => {
+    setSubmissionSuccessful(false);
+    document.body.classList.remove("no-scroll");
   };
 
   const handleNextClick = () => {
@@ -61,6 +80,8 @@ function App() {
 
   const handleFinalSubmit = async () => {
     try {
+      setSubmissionSuccessful(true);
+      document.body.classList.add("no-scroll");
       console.log(collectedData);
       // setFormSubmitted(true);
       await axios.post('https://www.juangroup.top/addPerson', {
@@ -116,6 +137,7 @@ function App() {
 
   return (
     <div className="App">
+        {submissionSuccessful && <SubmissionPopup onClose={closePopup} />}
         {currentForm === 'initial' && <Initial onStartClick={handleStartClick}/>}
         {currentForm === 'person' && <PersonForm ref={childFormRef} onDataCollected={onDataCollected} data={collectedData.person}/>}
         {currentForm === 'education' && <Education ref={childFormRef} onDataCollected={onDataCollected} data={collectedData.education}/>}
