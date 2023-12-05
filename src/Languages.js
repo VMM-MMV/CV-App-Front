@@ -4,13 +4,33 @@ class Languages extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            language: props.data.language || '',
+            levelLanguage: props.data.levelLanguage || '',
+            rangeValue: 0,
+        }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
     }
 
-    handleData() {
-        this.onDataCollected('languages', this.data);
+    handleLanguageChange = (e) => {
+        this.setState({ language: e.target.value });
+    }
 
+    handleLevelLanguageChange = (e) => {
+        this.setState({ levelLanguage: e.target.value });
+    }
+
+    handleData() {
+        const { language, levelLanguage } = this.state;
+
+        const updatedData = {
+            ...this.props.data,
+            language,
+            levelLanguage,
+        };
+
+        this.onDataCollected('languages', updatedData);
     }
 
     render () {
@@ -29,13 +49,13 @@ class Languages extends React.Component {
                                                 <label>
                                                     Languages:
                                                 </label>
-                                                <input type="text" required placeholder="e.g English" className="form-name" autoComplete="language" value={this.data.language} onChange={e => this.data.language = e.target.value}/>
+                                                <input type="text" required placeholder="e.g English" className="form-name" autoComplete="language" value={this.state.language} onChange={this.handleLanguageChange}/>
                                             </div>
                                             <div className="level-language-field">
                                                 <label>
                                                     Level:
                                                 </label>
-                                                <select className="form-name" value={this.data.levelLanguage} onChange={e => this.data.levelLanguage = e.target.value}>
+                                                <select className="form-name" value={this.state.levelLanguage} onChange={this.handleLevelLanguageChange}>
                                                     <option value="">Select language level</option>
                                                     <option value="A1">A1</option>
                                                     <option value="A2">A2</option>

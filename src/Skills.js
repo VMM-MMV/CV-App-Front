@@ -4,14 +4,26 @@ class Skills extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            skills: props.data.skills || '',
             rangeValue: 0,
         }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
     }
 
+    handleSkillsChange = (e) => {
+        this.setState({ skills: e.target.value });
+    }
+
     handleData() {
-        this.onDataCollected('skills', this.data);
+        const { skills} = this.state;
+
+        const updatedData = {
+            ...this.props.data,
+            skills,
+        };
+
+        this.onDataCollected('skills', updatedData);
 
     }
 
@@ -62,7 +74,7 @@ class Skills extends React.Component {
                                                 <label>
                                                     Skills:
                                                 </label>
-                                                <input type="text" required placeholder="e.g Microsoft" className="form-name" autoComplete="given-skills" value={this.data.skills} onChange={e => this.data.skills = e.target.value}/>
+                                                <input type="text" required placeholder="e.g Microsoft" className="form-name" autoComplete="given-skills" value={this.state.skills} onChange={this.handleSkillsChange}/>
                                             </div>
                                         </div>
                                         <div className="level-skills-full-fields">

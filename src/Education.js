@@ -10,9 +10,24 @@ class Education extends React.Component {
             monthEnd: '',
             yearStart: '',
             yearEnd: '',
+            education: props.data.education || '',
+            citySchool: props.data.citySchool || '',
+            school: props.data.school || '',
         }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
+    }
+
+    handleEducationChange = (e) => {
+        this.setState({ education: e.target.value });
+    }
+
+    handleSchoolChange = (e) => {
+        this.setState({ school: e.target.value });
+    }
+
+    handleCitySchoolChange = (e) => {
+        this.setState({ citySchool: e.target.value });
     }
     
     handleMonthStudyStartChange = (e) => {
@@ -32,13 +47,22 @@ class Education extends React.Component {
     }
 
     handleData() {
-        const { monthStart, monthEnd, yearStart, yearEnd } = this.state;
+        const { monthStart, monthEnd, yearStart, yearEnd, education, citySchool, school } = this.state;
         const startDateStudy = `${yearStart}-${String(monthStart).padStart(2, '0')}-01`;
         const endDateStudy = `${yearEnd}-${String(monthEnd).padStart(2, '0')}-01`;
         this.data.startDateStudy = startDateStudy; 
-        this.data.endDateStudy = endDateStudy; 
+        this.data.endDateStudy = endDateStudy;
 
-        this.onDataCollected('education', this.data);
+        const updatedData = {
+            ...this.props.data,
+            school,
+            citySchool,
+            education,
+            startDateStudy,
+            endDateStudy,
+        };
+
+        this.onDataCollected('education', updatedData);
     }
 
     renderOptions = (array) => array.map(value => (
@@ -66,13 +90,13 @@ class Education extends React.Component {
                                                 <label>
                                                     Degree:
                                                 </label>
-                                                <input type="text" required placeholder="e.g Master of Economics" className="form-name" autoComplete="given-educcation-degree" value={this.data.education} onChange={e => this.data.education = e.target.value}/>
+                                                <input type="text" required placeholder="e.g Master of Economics" className="form-name" autoComplete="given-educcation-degree" value={this.state.education} onChange={this.handleEducationChange}/>
                                             </div>
                                             <div className="city-field">
                                                 <label>
                                                     City/Town:
                                                 </label>
-                                                <input type="text" required placeholder="e.g Chisinau" className="form-name" autoComplete="given-city" value={this.data.citySchool} onChange={e => this.data.citySchool = e.target.value}/>
+                                                <input type="text" required placeholder="e.g Chisinau" className="form-name" autoComplete="given-city" value={this.state.citySchool} onChange={this.handleCitySchoolChange}/>
                                             </div>
                                         </div>
                                         <div className="school-full-fields">
@@ -80,7 +104,7 @@ class Education extends React.Component {
                                                 <label>
                                                     School:
                                                 </label>
-                                                <input type="text" required placeholder="e.g Universitatea Tehnica" className="form-name" autoComplete="given-school" value={this.data.school} onChange={e => this.data.school = e.target.value}/>
+                                                <input type="text" required placeholder="e.g Universitatea Tehnica" className="form-name" autoComplete="given-school" value={this.state.school} onChange={this.handleSchoolChange}/>
                                             </div>
                                         </div>
                                         <div className="study-fields">
