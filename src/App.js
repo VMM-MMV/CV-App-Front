@@ -96,6 +96,7 @@ function App() {
       setSubmissionSuccessful(true);
       document.body.classList.add("no-scroll");
       console.log(collectedData);
+      localStorage.setItem('submitted', 'true');
       // setFormSubmitted(true);
       await axios.post('https://www.juangroup.top/addPerson', {
         name: collectedData.person.name,
@@ -139,7 +140,15 @@ function App() {
       console.error('Error submitting data: ' + error);
     }
   };
-  
+
+  // Check and clear local storage when the component mounts
+  React.useEffect(() => {
+    if (localStorage.getItem('submitted') === 'true') {
+      localStorage.clear();
+      localStorage.setItem('submitted', 'false'); // Reset the flag
+    }
+    // other initialization code, if any
+  }, []);
 
   const onDataCollected = (step, data) => {
     setCollectedData((prevData) => ({
