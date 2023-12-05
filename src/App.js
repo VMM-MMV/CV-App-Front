@@ -54,6 +54,19 @@ function App() {
   };
 
   const handleNextClick = () => {
+    if (childFormRef.current && typeof childFormRef.current.validateFields === 'function') {
+      const isFormValid = childFormRef.current.validateFields();
+
+      if (!isFormValid) {
+        alert("Please fill in all required fields before proceeding.");
+        return;
+      }
+
+      // Logic to move to the next form
+    } else {
+      console.error('Validation method not found in the current form');
+    }
+
     // Try/Catch because not all forms may have 'handleData()' method.
     try {
       childFormRef.current.handleData();

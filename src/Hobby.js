@@ -11,6 +11,12 @@ class Hobby extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { hobby } = this.state;
+        return hobby.trim() !== '';
+    }
+
     handleHobbyChange = (e) => {
         this.setState({ hobby: e.target.value });
     }

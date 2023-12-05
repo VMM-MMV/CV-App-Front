@@ -12,6 +12,12 @@ class Skills extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { skills } = this.state;
+        return skills.trim() !== '';
+    }
+
     handleSkillsChange = (e) => {
         this.setState({ skills: e.target.value });
     }

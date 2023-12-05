@@ -90,6 +90,16 @@ class PersonForm extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { name, lastname, email, address, city, nationality,
+            day, month, year, sex, civilStatus, hasKids, phoneNumber, countryCode } = this.state;
+        return name.trim() !== '' && lastname.trim() !== '' && email.trim() !== '' && address.trim() !== ''
+            && city.trim() !== '' && nationality.trim() !== '' && sex.trim() !== '' && countryCode.trim() !== ''
+            && phoneNumber.trim() !== '' && civilStatus.trim() !== '' && hasKids.trim() !== '' && month.trim() !== ''
+            && day.trim() !== '' && year.trim() !== '';
+    }
+
     handleNameChange = (e) => {
         this.setState({ name: e.target.value });
     }

@@ -18,6 +18,13 @@ class Education extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { education, citySchool, school, monthStart, monthEnd, yearStart, yearEnd } = this.state;
+        return education.trim() !== '' && citySchool.trim() !== '' && school.trim() !== '' && monthEnd.trim() !== ''
+            && monthStart.trim() !== '' && yearStart.trim() !== '' && yearEnd.trim() !== '';
+    }
+
     handleEducationChange = (e) => {
         this.setState({ education: e.target.value });
     }

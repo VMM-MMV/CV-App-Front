@@ -13,6 +13,12 @@ class Languages extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { language, levelLanguage} = this.state;
+        return language.trim() !== '' && levelLanguage.trim() !== '';
+    }
+
     handleLanguageChange = (e) => {
         this.setState({ language: e.target.value });
     }

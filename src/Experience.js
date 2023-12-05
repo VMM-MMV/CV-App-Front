@@ -21,6 +21,13 @@ class Experience extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { titleJob, cityJob, employer, descriptionJob, monthJobStart, monthJobEnd, yearJobStart, yearJobEnd } = this.state;
+        return titleJob.trim() !== '' && cityJob.trim() !== '' && employer.trim() !== '' && descriptionJob.trim() !== ''
+            && monthJobStart.trim() !== '' && monthJobEnd.trim() !== '' && yearJobEnd.trim() !== '' && yearJobStart.trim() !== '';
+    }
+
     handleTitleChange = (e) => {
         this.setState({ titleJob: e.target.value });
     }
