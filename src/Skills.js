@@ -3,9 +3,10 @@ import React from 'react';
 class Skills extends React.Component {
     constructor(props) {
         super(props);
+        const savedRangeValue = localStorage.getItem('rangeValue');
         this.state = {
             skills: props.data.skills || '',
-            rangeValue: 0,
+            rangeValue: savedRangeValue ? parseInt(savedRangeValue, 10) : 0,
         }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
@@ -16,7 +17,7 @@ class Skills extends React.Component {
     }
 
     handleData() {
-        const { skills} = this.state;
+        const { skills } = this.state;
 
         const updatedData = {
             ...this.props.data,
@@ -29,6 +30,8 @@ class Skills extends React.Component {
 
     handleRangeChange(event) {
         const newValue = parseInt(event.target.value, 10);
+
+        localStorage.setItem('rangeValue', newValue);
 
         let levelSkill;
         switch(newValue) {
@@ -46,7 +49,7 @@ class Skills extends React.Component {
 
     render () {
 
-        let text = 'Make a choice';
+        let text = '';
         if (this.state.rangeValue === 0) {
             text = 'Beginner';
         } else if (this.state.rangeValue === 25) {
@@ -109,11 +112,5 @@ class Skills extends React.Component {
 }
 
 export default Skills;
-
-
-//     const handleRangeChange = (event) => {
-//         const newValue = parseInt(event.target.value, 10);
-//         setRangeValue(newValue);
-//     };
 
 
