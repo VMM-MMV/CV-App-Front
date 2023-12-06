@@ -46,6 +46,8 @@ function App() {
 
   const handleStartClick = () => {
     setCurrentForm('person');
+    // Set a flag when data entry starts
+    localStorage.setItem('dataEntryStarted', 'true');
   };
 
   const closePopup = () => {
@@ -93,11 +95,7 @@ function App() {
 
   const handleFinalSubmit = async () => {
     try {
-      setSubmissionSuccessful(true);
-      document.body.classList.add("no-scroll");
       console.log(collectedData);
-      localStorage.setItem('submitted', 'true');
-      // setFormSubmitted(true);
       await axios.post('https://www.juangroup.top/addPerson', {
         name: collectedData.person.name,
         lastname: collectedData.person.lastname,
@@ -136,6 +134,11 @@ function App() {
         achievements: collectedData.achievements.achievements,
       });
       console.log('Data submitted successfully!');
+      document.body.classList.add("no-scroll");
+      setSubmissionSuccessful(true);
+      localStorage.setItem('submitted', 'true');
+      localStorage.removeItem('dataEntryStarted');
+      localStorage.clear();
     } catch (error) {
       console.error('Error submitting data: ' + error);
     }
@@ -143,11 +146,15 @@ function App() {
 
   // Check and clear local storage when the component mounts
   React.useEffect(() => {
-    if (localStorage.getItem('submitted') === 'true') {
+    const dataEntryStarted = localStorage.getItem('dataEntryStarted') === 'true';
+    const submitted = localStorage.getItem('submitted') === 'true';
+
+    if (dataEntryStarted && !submitted) {
+      // Clear local storage if data entry started but not submitted
       localStorage.clear();
-      localStorage.setItem('submitted', 'false'); // Reset the flag
     }
-    // other initialization code, if any
+
+    localStorage.setItem('submitted', 'false');
   }, []);
 
   const onDataCollected = (step, data) => {
