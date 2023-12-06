@@ -3,20 +3,41 @@ import React from 'react';
 class Skills extends React.Component {
     constructor(props) {
         super(props);
+        const savedRangeValue = localStorage.getItem('rangeValue');
         this.state = {
-            rangeValue: 0,
+            skills: props.data.skills || '',
+            rangeValue: savedRangeValue ? parseInt(savedRangeValue, 10) : 0,
         }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { skills } = this.state;
+        return skills.trim() !== '';
+    }
+
+    handleSkillsChange = (e) => {
+        this.setState({ skills: e.target.value });
+    }
+
     handleData() {
-        this.onDataCollected('skills', this.data);
+        const { skills } = this.state;
+
+        const updatedData = {
+            ...this.props.data,
+            skills,
+        };
+
+        this.onDataCollected('skills', updatedData);
 
     }
 
     handleRangeChange(event) {
         const newValue = parseInt(event.target.value, 10);
+
+        localStorage.setItem('rangeValue', newValue);
 
         let levelSkill;
         switch(newValue) {
@@ -34,7 +55,7 @@ class Skills extends React.Component {
 
     render () {
 
-        let text = 'Make a choice';
+        let text = '';
         if (this.state.rangeValue === 0) {
             text = 'Beginner';
         } else if (this.state.rangeValue === 25) {
@@ -62,7 +83,7 @@ class Skills extends React.Component {
                                                 <label>
                                                     Skills:
                                                 </label>
-                                                <input type="text" required placeholder="e.g Microsoft" className="form-name" autoComplete="given-skills" value={this.data.skills} onChange={e => this.data.skills = e.target.value}/>
+                                                <input type="text" required placeholder="e.g Microsoft" className="form-name" autoComplete="given-skills" value={this.state.skills} onChange={this.handleSkillsChange}/>
                                             </div>
                                         </div>
                                         <div className="level-skills-full-fields">
@@ -97,11 +118,5 @@ class Skills extends React.Component {
 }
 
 export default Skills;
-
-
-//     const handleRangeChange = (event) => {
-//         const newValue = parseInt(event.target.value, 10);
-//         setRangeValue(newValue);
-//     };
 
 

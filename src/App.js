@@ -12,10 +12,24 @@ import Achievements from './Achievements';
 import Finalize from './Finalize';
 import axios from 'axios';
 
+function SubmissionPopup({ onClose }) {
+  return (
+      <div className="popup-overlay">
+        <div className="popup-content">
+          <p>Your CV has been submitted successfully!</p>
+            <div className="button-container">
+            <button autoFocus className="button-ok" onClick={onClose}>OK</button>
+            </div>
+        </div>
+      </div>
+  );
+}
+
 function App() {
   const steps = ['person', 'education', 'experience', 'skills', 'languages', 'hobby', 'achievements', 'finalize'];
   const [currentForm, setCurrentForm] = useState('initial');
   const [furthestStepReached, setFurthestStepReached] = useState(0);
+  const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
   // const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [collectedData, setCollectedData] = useState({
@@ -32,9 +46,29 @@ function App() {
 
   const handleStartClick = () => {
     setCurrentForm('person');
+    // Set a flag when data entry starts
+    localStorage.setItem('dataEntryStarted', 'true');
+  };
+
+  const closePopup = () => {
+    setSubmissionSuccessful(false);
+    document.body.classList.remove("no-scroll");
   };
 
   const handleNextClick = () => {
+    if (childFormRef.current && typeof childFormRef.current.validateFields === 'function') {
+      const isFormValid = childFormRef.current.validateFields();
+
+      if (!isFormValid) {
+        alert("Please fill in all required fields before proceeding.");
+        return;
+      }
+
+      // Logic to move to the next form
+    } else {
+      console.error('Validation method not found in the current form');
+    }
+
     // Try/Catch because not all forms may have 'handleData()' method.
     try {
       childFormRef.current.handleData();
@@ -62,7 +96,6 @@ function App() {
   const handleFinalSubmit = async () => {
     try {
       console.log(collectedData);
-      // setFormSubmitted(true);
       await axios.post('https://www.juangroup.top/addPerson', {
         name: collectedData.person.name,
         lastname: collectedData.person.lastname,
@@ -101,11 +134,28 @@ function App() {
         achievements: collectedData.achievements.achievements,
       });
       console.log('Data submitted successfully!');
+      document.body.classList.add("no-scroll");
+      setSubmissionSuccessful(true);
+      localStorage.setItem('submitted', 'true');
+      localStorage.removeItem('dataEntryStarted');
+      localStorage.clear();
     } catch (error) {
       console.error('Error submitting data: ' + error);
     }
   };
-  
+
+  // Check and clear local storage when the component mounts
+  React.useEffect(() => {
+    const dataEntryStarted = localStorage.getItem('dataEntryStarted') === 'true';
+    const submitted = localStorage.getItem('submitted') === 'true';
+
+    if (dataEntryStarted && !submitted) {
+      // Clear local storage if data entry started but not submitted
+      localStorage.clear();
+    }
+
+    localStorage.setItem('submitted', 'false');
+  }, []);
 
   const onDataCollected = (step, data) => {
     setCollectedData((prevData) => ({
@@ -116,6 +166,7 @@ function App() {
 
   return (
     <div className="App">
+        {submissionSuccessful && <SubmissionPopup onClose={closePopup} />}
         {currentForm === 'initial' && <Initial onStartClick={handleStartClick}/>}
         {currentForm === 'person' && <PersonForm ref={childFormRef} onDataCollected={onDataCollected} data={collectedData.person}/>}
         {currentForm === 'education' && <Education ref={childFormRef} onDataCollected={onDataCollected} data={collectedData.education}/>}
@@ -138,7 +189,7 @@ function App() {
                     )}
                     {steps.indexOf(currentForm) >= steps.indexOf('person') && (
                       isFinalizePage ? (
-                        <button onClick={handleFinalSubmit} className="button-field button-next" type="button">
+                        <button onClick={handleFinalSubmit} className="button-field button-final" type="button">
                           Submit
                         </button>
                       ) : (

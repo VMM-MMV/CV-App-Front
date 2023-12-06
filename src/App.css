@@ -38,7 +38,7 @@
   top: 0;
   bottom: 0;
   width: 240px;
-  padding: 20px 50px 35px;
+  padding: 0 50px 55px;
   background: #a47fc9;
 
   display: flex;
@@ -394,13 +394,25 @@ h1, h2 {
   padding: 0 50px;
   font-size: 1.2rem;
   text-align: center;
+  outline: none;
   color: #fff;
   border-radius: 25px;
   background-color: #002d6b;
   background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
-  box-shadow:
-    inset 2px 2px 3px rgba(255, 255, 255, 0.6),
-    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 5px #5a3e79;
+}
+
+.button-ok {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-text-stroke-width: 1px;
+  background-color: unset;
+  color: #cf9cff;
+}
+
+.button-container {
+  text-align: right;
 }
 
 .button-back {
@@ -411,6 +423,31 @@ h1, h2 {
 .button-next {
   margin-right: 108px;
   margin-left: 0;
+}
+
+.button-final {
+  margin-right: 108px;
+  margin-left: 0;
+}
+
+.button-final:hover, .button-back:hover, .button-next:hover, .button-create:hover {
+  background-color: #a47fc9;
+  color: white;
+}
+
+.button-final:active, .button-create:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+.button-next:active {
+  box-shadow: none;
+  transform: translateX(4px);
+}
+
+.button-back:active {
+  box-shadow: none;
+  transform: translateX(-4px);
 }
 
 .button-create {
@@ -426,7 +463,29 @@ option {
   padding: 0;
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other elements */
+}
 
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
 
 
 

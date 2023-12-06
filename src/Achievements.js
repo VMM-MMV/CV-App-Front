@@ -12,6 +12,12 @@ class Achievements extends React.Component {
         this.onDataCollected = props.onDataCollected;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { achievements } = this.state;
+        return achievements.trim() !== '';
+    }
+
     handleAchievementsChange = (event) => {
         const content = event; 
         this.setState({ achievements: content }, () => {

@@ -21,6 +21,13 @@ class Experience extends React.Component {
         this.data = props.data;
     }
 
+    validateFields = () => {
+        // Example validation logic
+        const { titleJob, cityJob, employer, descriptionJob, monthJobStart, monthJobEnd, yearJobStart, yearJobEnd } = this.state;
+        return titleJob.trim() !== '' && cityJob.trim() !== '' && employer.trim() !== '' && descriptionJob.trim() !== ''
+            && monthJobStart.trim() !== '' && monthJobEnd.trim() !== '' && yearJobEnd.trim() !== '' && yearJobStart.trim() !== '';
+    }
+
     handleTitleChange = (e) => {
         this.setState({ titleJob: e.target.value });
     }
@@ -34,19 +41,35 @@ class Experience extends React.Component {
     }
 
     handleMonthJobStartChange = (e) => {
-        this.setState({ monthJobStart: e.target.value });
+        const month = e.target.value;
+        this.setState({ monthJobStart: month });
+        localStorage.setItem('monthJobStart', month);
     }
     
     handleMonthJobEndChange = (e) => {
-        this.setState({ monthJobEnd: e.target.value });
+        const month = e.target.value;
+        this.setState({ monthJobEnd: month });
+        localStorage.setItem('monthJobEnd', month);
     }
-    
+
     handleYearJobStartChange = (e) => {
-        this.setState({ yearJobStart: e.target.value });
+        const year = e.target.value;
+        this.setState({ yearJobStart: year });
+        localStorage.setItem('yearJobStart', year);
     }
 
     handleYearJobEndChange = (e) => {
-        this.setState({ yearJobEnd: e.target.value });
+        const year = e.target.value;
+        this.setState({ yearJobEnd: year});
+        localStorage.setItem('yearJobEnd', year);
+    }
+
+    componentDidMount() {
+        const monthJobStart = localStorage.getItem('monthJobStart') || '';
+        const monthJobEnd = localStorage.getItem('monthJobEnd') || '';
+        const yearJobStart = localStorage.getItem('yearJobStart') || '';
+        const yearJobEnd = localStorage.getItem('yearJobEnd') || '';
+        this.setState({ monthJobStart, monthJobEnd, yearJobStart, yearJobEnd });
     }
 
     handleDescriptionChange = (event) => {

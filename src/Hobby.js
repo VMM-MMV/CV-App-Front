@@ -4,13 +4,32 @@ class Hobby extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            hobby: props.data.hobby || '',
+        }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
     }
 
-    handleData() {
-        this.onDataCollected('hobby', this.data);
+    validateFields = () => {
+        // Example validation logic
+        const { hobby } = this.state;
+        return hobby.trim() !== '';
+    }
 
+    handleHobbyChange = (e) => {
+        this.setState({ hobby: e.target.value });
+    }
+
+    handleData() {
+        const { hobby } = this.state;
+
+        const updatedData = {
+            ...this.props.data,
+            hobby,
+        };
+
+        this.onDataCollected('hobby', updatedData);
     }
 
     render () {
@@ -29,7 +48,7 @@ class Hobby extends React.Component {
                                                 <label>
                                                     Hobby:
                                                 </label>
-                                                <input type="text" required placeholder="e.g Listening to music, Coding all day all night" className="form-name" autoComplete="hobby" value={this.data.hobby} onChange={(e) => this.data.hobby = e.target.value}/>
+                                                <input type="text" required placeholder="e.g Listening to music, Coding all day all night" className="form-name" autoComplete="hobby" value={this.state.hobby} onChange={this.handleHobbyChange}/>
                                             </div>
                                         </div>
                                     </form>

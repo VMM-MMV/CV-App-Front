@@ -74,29 +74,123 @@ class PersonForm extends React.Component {
             day: '',
             month: '',
             year: '',
+            name: props.data.name || '',
+            lastname: props.data.lastname || '',
+            address: props.data.address || '',
+            city: props.data.city || '',
+            nationality: props.data.nationality || '',
+            sex: props.data.sex || '',
+            civilStatus: props.data.civilStatus || '',
+            hasKids: props.data.hasKids || '',
+            email: props.data.email || '',
+            countryCode: props.data.countryCode || '',
+            phoneNumber: props.data.phoneNumber || '',
         }
         this.onDataCollected = props.onDataCollected;
         this.data = props.data;
     }
-    
+
+    validateFields = () => {
+        // Example validation logic
+        const { name, lastname, email, address, city, nationality,
+            day, month, year, sex, civilStatus, hasKids, phoneNumber, countryCode } = this.state;
+        return name.trim() !== '' && lastname.trim() !== '' && email.trim() !== '' && address.trim() !== ''
+            && city.trim() !== '' && nationality.trim() !== '' && sex.trim() !== '' && countryCode.trim() !== ''
+            && phoneNumber.trim() !== '' && civilStatus.trim() !== '' && hasKids.trim() !== '' && month.trim() !== ''
+            && day.trim() !== '' && year.trim() !== '';
+    }
+
+    handleNameChange = (e) => {
+        this.setState({ name: e.target.value });
+    }
+
+    handleLastnameChange = (e) => {
+        this.setState({ lastname: e.target.value });
+    }
+
+    handleAddressChange = (e) => {
+        this.setState({ address: e.target.value });
+    }
+
+    handleCityChange = (e) => {
+        this.setState({ city: e.target.value });
+    }
+
+    handleNationalityChange = (e) => {
+        this.setState({ nationality: e.target.value });
+    }
+
+    handleSexChange = (e) => {
+        this.setState({ sex: e.target.value });
+    }
+
+    handleCivilStatusChange = (e) => {
+        this.setState({ civilStatus: e.target.value });
+    }
+
+    handleHasKidsChange = (e) => {
+        this.setState({ hasKids: e.target.value });
+    }
+
+    handleEmailChange = (e) => {
+        this.setState({ email: e.target.value });
+    }
+
+    handleCountryCodeChange = (e) => {
+        this.setState({ countryCode: e.target.value });
+    }
+
+    handlePhoneNumberChange = (e) => {
+        this.setState({ phoneNumber: e.target.value });
+    }
+
     handleDayChange = (e) => {
-        this.setState({ day: e.target.value });
+        const day = e.target.value;
+        this.setState({ day: day });
+        localStorage.setItem('day', day);
     }
     
     handleMonthChange = (e) => {
-        this.setState({ month: e.target.value });
+        const month = e.target.value;
+        this.setState({ month: month });
+        localStorage.setItem('month', month);
     }
     
     handleYearChange = (e) => {
-        this.setState({ year: e.target.value });
+        const year = e.target.value;
+        this.setState({ year: year });
+        localStorage.setItem('year', year);
+    }
+
+    componentDidMount() {
+        const day = localStorage.getItem('day') || '';
+        const month = localStorage.getItem('month') || '';
+        const year = localStorage.getItem('year') || '';
+        this.setState({ day, month, year });
     }
 
     handleData() {
-        const { day, month, year } = this.state;
+        const { day, month, year, name, lastname, address, city, nationality, sex, civilStatus, hasKids, email, countryCode, phoneNumber } = this.state;
         const birthdate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        this.data.birthdate = birthdate; 
+        this.data.birthdate = birthdate;
 
-        this.onDataCollected('person', this.data);
+        const updatedData = {
+            ...this.props.data,
+            name,
+            lastname,
+            address,
+            city,
+            nationality,
+            sex,
+            civilStatus,
+            hasKids,
+            email,
+            countryCode,
+            phoneNumber,
+            birthdate,
+        };
+
+        this.onDataCollected('person', updatedData);
 
     }
 
@@ -127,13 +221,13 @@ class PersonForm extends React.Component {
                                             <label>
                                                 First Name:
                                             </label>
-                                            <input type="text" required placeholder="e.g Michael" className="form-name" autoComplete="name" value={this.data.name} onChange={e => this.data.name = e.target.value}/>
+                                            <input type="text" required placeholder="e.g Michael" className="form-name" autoComplete="name" value={this.state.name} onChange={this.handleNameChange}/>
                                         </div>
                                         <div className="last-name-field" name="enter-last-name">
                                             <label>
                                                 Last Name:
                                             </label>
-                                            <input type="text" required placeholder="e.g Carlson" className="form-name" autoComplete="family-name" value={this.data.lastname} onChange={e => this.data.lastname = e.target.value}/>
+                                            <input type="text" required placeholder="e.g Carlson" className="form-name" autoComplete="family-name" value={this.state.lastname} onChange={this.handleLastnameChange}/>
                                         </div>
                                     </div>
                                     <div className="address-full-fields">
@@ -141,13 +235,13 @@ class PersonForm extends React.Component {
                                             <label>
                                                 Address:
                                             </label>
-                                            <input type="text" placeholder="e.g str.Banulescu Bodoni 12" className="form-name" autoComplete="street-address" value={this.data.address} onChange={e => this.data.address = e.target.value}/>
+                                            <input type="text" placeholder="e.g str.Banulescu Bodoni 12" className="form-name" autoComplete="street-address" value={this.state.address} onChange={this.handleAddressChange}/>
                                         </div>
                                         <div className="city-field">
                                             <label>
                                                 City:
                                             </label>
-                                            <select className="form-name" value={this.data.city} onChange={e => this.data.city = e.target.value}>
+                                            <select className="form-name" value={this.state.city} onChange={this.handleCityChange}>
                                                 <option value="">Select city</option>
                                                 {cities.map(c => <option key={c} value={c}>{c}</option>)}
                                             </select>
@@ -156,7 +250,7 @@ class PersonForm extends React.Component {
                                             <label>
                                                 Nationality:
                                             </label>
-                                            <input type="text" placeholder="e.g Moldovan" className="form-name" autoComplete="nationality" value={this.data.nationality} onChange={e => this.data.nationality = e.target.value}/>
+                                            <input type="text" placeholder="e.g Moldovan" className="form-name" autoComplete="nationality" value={this.state.nationality} onChange={this.handleNationalityChange}/>
                                         </div>
                                     </div>
                                     <div className="coming-from-fields">
@@ -191,7 +285,7 @@ class PersonForm extends React.Component {
                                             <label>
                                                 Sex:
                                             </label>
-                                            <select value={this.data.sex} className="form-name" onChange={e => this.data.sex = e.target.value}>
+                                            <select value={this.state.sex} className="form-name" onChange={this.handleSexChange}>
                                                 <option value="">Select gender</option>
                                                 <option value="MALE">Male</option>
                                                 <option value="FEMALE">Female</option>
@@ -203,7 +297,7 @@ class PersonForm extends React.Component {
                                             <label>
                                                 Civil Status:
                                             </label>
-                                            <select className="form-name" value={this.data.civilStatus} onChange={e => this.data.civilStatus = e.target.value}>
+                                            <select className="form-name" value={this.state.civilStatus} onChange={this.handleCivilStatusChange}>
                                                 <option value="">Select status</option>
                                                 <option value="Unmarried">Unmarried</option>
                                                 <option value="Married">Married</option>
@@ -215,7 +309,7 @@ class PersonForm extends React.Component {
                                             <label>
                                                 Kids:
                                             </label>
-                                            <select className="form-name" value={this.data.hasKids} onChange={e => this.data.hasKids = e.target.value}>
+                                            <select className="form-name" value={this.state.hasKids} onChange={this.handleHasKidsChange}>
                                                 <option value="">Select option</option>
                                                 <option value="YES">Yes</option>
                                                 <option value="NO">No</option>
@@ -225,14 +319,14 @@ class PersonForm extends React.Component {
                                     <div className="email-number-full-fields">
                                         <div className="email-address-field">
                                             <label>Email:</label>
-                                            <input type="email" required placeholder="Enter email" className="form-name" autoComplete="email" value={this.data.email} onChange={e => this.data.email = e.target.value}/>
+                                            <input type="email" required placeholder="Enter email" className="form-name" autoComplete="email" value={this.state.email} onChange={this.handleEmailChange}/>
                                         </div>
                                         <div className="phone-number-field">
                                             <div className="phone-select-container">
                                             <label>
                                                 Phone Number:
                                             </label>
-                                                <select className="form-name" value={this.data.countryCode} onChange={e => this.data.countryCode = e.target.value}>
+                                                <select className="form-name" value={this.state.countryCode} onChange={this.handleCountryCodeChange}>
                                                 <option value="">Select Code</option>
                                                     {countries.map((country, index) => (
                                                         <option key={country.code + index} value={country.code}>
@@ -243,7 +337,7 @@ class PersonForm extends React.Component {
                                             </div>
                                         </div>
                                         <div className="phone-field">
-                                            <input type="text" required placeholder="Phone Number" className="form-name" value={this.data.phoneNumber} onChange={e => this.data.phoneNumber = e.target.value}/>
+                                            <input type="text" required placeholder="Phone Number" className="form-name" value={this.state.phoneNumber} onChange={this.handlePhoneNumberChange}/>
                                         </div>
                                     </div>
                                </form>
