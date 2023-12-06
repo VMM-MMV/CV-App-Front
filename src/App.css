@@ -54,8 +54,9 @@
 }
 
 .footer-aside {
-  margin: auto -10px 0 -30px;
-  position: relative;
+  margin: auto -30px;
+  margin-top: 60px;
+  position: -ms-device-fixed;
 }
 
 .App-header {
