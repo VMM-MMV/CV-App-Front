@@ -36,21 +36,37 @@ class Education extends React.Component {
     handleCitySchoolChange = (e) => {
         this.setState({ citySchool: e.target.value });
     }
-    
+
     handleMonthStudyStartChange = (e) => {
-        this.setState({ monthStart: e.target.value });
+        const month = e.target.value;
+        this.setState({ monthStart: month });
+        localStorage.setItem('monthStart', month);
     }
-    
+
     handleMonthStudyEndChange = (e) => {
-        this.setState({ monthEnd: e.target.value });
+        const month = e.target.value;
+        this.setState({ monthEnd: month });
+        localStorage.setItem('monthEnd', month);
     }
-    
+
     handleYearStudyStartChange = (e) => {
-        this.setState({ yearStart: e.target.value });
+        const year = e.target.value;
+        this.setState({ yearStart: year });
+        localStorage.setItem('yearStart', year);
     }
 
     handleYearStudyEndChange = (e) => {
-        this.setState({ yearEnd: e.target.value });
+        const year = e.target.value;
+        this.setState({ yearEnd: year});
+        localStorage.setItem('yearEnd', year);
+    }
+
+    componentDidMount() {
+        const monthStart = localStorage.getItem('monthStart') || '';
+        const monthEnd = localStorage.getItem('monthEnd') || '';
+        const yearStart = localStorage.getItem('yearStart') || '';
+        const yearEnd = localStorage.getItem('yearEnd') || '';
+        this.setState({ monthStart, monthEnd, yearStart, yearEnd });
     }
 
     handleData() {

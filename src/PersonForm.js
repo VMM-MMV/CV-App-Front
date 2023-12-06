@@ -145,15 +145,28 @@ class PersonForm extends React.Component {
     }
 
     handleDayChange = (e) => {
-        this.setState({ day: e.target.value });
+        const day = e.target.value;
+        this.setState({ day: day });
+        localStorage.setItem('day', day);
     }
     
     handleMonthChange = (e) => {
-        this.setState({ month: e.target.value });
+        const month = e.target.value;
+        this.setState({ month: month });
+        localStorage.setItem('month', month);
     }
     
     handleYearChange = (e) => {
-        this.setState({ year: e.target.value });
+        const year = e.target.value;
+        this.setState({ year: year });
+        localStorage.setItem('year', year);
+    }
+
+    componentDidMount() {
+        const day = localStorage.getItem('day') || '';
+        const month = localStorage.getItem('month') || '';
+        const year = localStorage.getItem('year') || '';
+        this.setState({ day, month, year });
     }
 
     handleData() {
