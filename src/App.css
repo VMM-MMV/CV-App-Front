@@ -331,9 +331,9 @@ h1, h2 {
   font-size: 16px;
 }
 
-.address-field .form-name {
-  margin-right: 207px;
-}
+/*.address-field .form-name {*/
+/*  margin-right: 207px;*/
+/*}*/
 
 .coming-from-fields .date-birth-field,
 .study-fields .date-study-field {
@@ -355,20 +355,36 @@ h1, h2 {
   margin-top: 19px;
 }
 
-.phone-field input[type=text] {
-  height: 48px;
-}
+/*.phone-field input[type=text], .nationality-field input[type=text] {*/
+/*  height: 48px;*/
+/*}*/
 
-.phone-field {
+.phone-field, .nationality-field {
   width: 10%;
 }
 
-.phone-number-field {
+.phone-number-field, .city-field {
   width: 0;
+}
+
+.phone-number-field .form-name, .city-field .form-name {
+  height: 46px;
+}
+
+.date-birth-field .form-name,
+.sex-status-field .form-name,
+.civil-status-field .form-name,
+.kids-status-field .form-name,
+.date-study-field .form-name{
+  height: 46px;
 }
 
 .email-address-field {
  width: 275px;
+}
+
+.address-field {
+  width: 271px;
 }
 
 .sex-status-field {
